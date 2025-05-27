@@ -587,16 +587,67 @@ $placebo
 <section id="write-a-function" class="level3">
 <h3 class="anchored" data-anchor-id="write-a-function">Write a function</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>task5_function <span class="ot">&lt;-</span> <span class="cf">function</span>(x , <span class="at">stat =</span> <span class="st">"mean"</span>){</span>
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>task5_function <span class="ot">&lt;-</span> <span class="cf">function</span>(x, <span class="at">stat =</span> <span class="st">"mean"</span>){</span>
 <span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>  </span>
 <span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>  my_fun <span class="ot">&lt;-</span> <span class="fu">get</span>(stat)</span>
 <span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a>  treatment <span class="ot">&lt;-</span> x[[<span class="dv">1</span>]]</span>
-<span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a>  placebo <span class="ot">&lt;-</span>x[[<span class="dv">2</span>]]</span>
-<span id="cb38-7"><a href="#cb38-7" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb38-8"><a href="#cb38-8" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb38-9"><a href="#cb38-9" aria-hidden="true" tabindex="-1"></a><span class="fu">my_fun</span>(x<span class="sc">$</span>treatment<span class="sc">$</span>pre)</span>
-<span id="cb38-10"><a href="#cb38-10" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a>values <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a><span class="fu">my_fun</span>(x<span class="sc">$</span>treatment<span class="sc">$</span>pre_bp),</span>
+<span id="cb38-7"><a href="#cb38-7" aria-hidden="true" tabindex="-1"></a><span class="fu">my_fun</span>(x<span class="sc">$</span>treatment<span class="sc">$</span>post_bp),</span>
+<span id="cb38-8"><a href="#cb38-8" aria-hidden="true" tabindex="-1"></a><span class="fu">my_fun</span>(x<span class="sc">$</span>treatment<span class="sc">$</span>diff_bp),</span>
+<span id="cb38-9"><a href="#cb38-9" aria-hidden="true" tabindex="-1"></a><span class="fu">my_fun</span>(x<span class="sc">$</span>placebo<span class="sc">$</span>pre_bp),</span>
+<span id="cb38-10"><a href="#cb38-10" aria-hidden="true" tabindex="-1"></a><span class="fu">my_fun</span>(x<span class="sc">$</span>placebo<span class="sc">$</span>post_bp),</span>
+<span id="cb38-11"><a href="#cb38-11" aria-hidden="true" tabindex="-1"></a><span class="fu">my_fun</span>(x<span class="sc">$</span>placebo<span class="sc">$</span>diff_bp)</span>
+<span id="cb38-12"><a href="#cb38-12" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb38-13"><a href="#cb38-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-14"><a href="#cb38-14" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(values) <span class="ot">&lt;-</span> <span class="fu">paste</span>(stat,<span class="fu">c</span>(</span>
+<span id="cb38-15"><a href="#cb38-15" aria-hidden="true" tabindex="-1"></a>  <span class="st">'treatment_pre'</span>,</span>
+<span id="cb38-16"><a href="#cb38-16" aria-hidden="true" tabindex="-1"></a>  <span class="st">'treatment_post'</span>,</span>
+<span id="cb38-17"><a href="#cb38-17" aria-hidden="true" tabindex="-1"></a>  <span class="st">'treatment_diff'</span>,</span>
+<span id="cb38-18"><a href="#cb38-18" aria-hidden="true" tabindex="-1"></a>  <span class="st">'placebo_pre'</span>,</span>
+<span id="cb38-19"><a href="#cb38-19" aria-hidden="true" tabindex="-1"></a>  <span class="st">'placebo_post'</span>,</span>
+<span id="cb38-20"><a href="#cb38-20" aria-hidden="true" tabindex="-1"></a>  <span class="st">'placebo_diff'</span></span>
+<span id="cb38-21"><a href="#cb38-21" aria-hidden="true" tabindex="-1"></a>),</span>
+<span id="cb38-22"><a href="#cb38-22" aria-hidden="true" tabindex="-1"></a><span class="at">sep =</span> <span class="st">"_"</span>)</span>
+<span id="cb38-23"><a href="#cb38-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-24"><a href="#cb38-24" aria-hidden="true" tabindex="-1"></a><span class="fu">return</span>(values)</span>
+<span id="cb38-25"><a href="#cb38-25" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb38-26"><a href="#cb38-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-27"><a href="#cb38-27" aria-hidden="true" tabindex="-1"></a><span class="fu">task5_function</span>(bp_list,)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> mean_treatment_pre mean_treatment_post mean_treatment_diff    mean_placebo_pre 
+             129.35              112.35              -17.00              131.90 
+  mean_placebo_post   mean_placebo_diff 
+             128.90               -3.00 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="fu">task5_function</span>(bp_list,<span class="st">'var'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> var_treatment_pre var_treatment_post var_treatment_diff    var_placebo_pre 
+          64.55526           74.76579          153.68421          149.87778 
+  var_placebo_post   var_placebo_diff 
+         124.98889          341.33333 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="fu">task5_function</span>(bp_list,<span class="st">'sd'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> sd_treatment_pre sd_treatment_post sd_treatment_diff    sd_placebo_pre 
+         8.034629          8.646721         12.396944         12.242458 
+  sd_placebo_post   sd_placebo_diff 
+        11.179843         18.475209 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="fu">task5_function</span>(bp_list,<span class="st">'min'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> min_treatment_pre min_treatment_post min_treatment_diff    min_placebo_pre 
+               114                 98                -40                114 
+  min_placebo_post   min_placebo_diff 
+               105                -33 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="fu">task5_function</span>(bp_list,<span class="st">'max'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> max_treatment_pre max_treatment_post max_treatment_diff    max_placebo_pre 
+               141                130                  5                152 
+  max_placebo_post   max_placebo_diff 
+               143                 21 </code></pre>
+</div>
 </div>
 </section>
 </section>
